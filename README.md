@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Syook Internal CRM Prototype – Mobile Deal Action Hub
 
-## Getting Started
+A mobile-first CRM prototype built as part of the Syook Product Manager Challenge.
 
-First, run the development server:
+## Overview
+
+This prototype focuses on helping field sales associates manage active deals while on the move.
+
+Instead of building a full CRM, the solution focuses on a single problem:
+
+> Prevent deals from losing momentum by making deal status, missing documents, client-side blockers, and inactive deals visible in one lightweight mobile workflow.
+
+The primary user is a field sales associate who spends most of the day between customer meetings, demos, follow-ups, and document sharing.
+
+---
+
+## Problem Statement
+
+Sales associates currently lack a simple mobile workflow to:
+
+- Track active deals
+- Identify deals missing documents
+- Mark deals blocked by external client factors
+- Surface deals that have gone inactive
+
+As a result, deal progress can become fragmented and difficult to manage.
+
+---
+
+## Solution
+
+The **Mobile Deal Action Hub** combines the most important day-to-day sales workflows into a single mobile experience.
+
+### Included in V1
+
+#### Open Deals (My Pipeline)
+- View active deals
+- See stage, value, and last activity
+- Open deal details
+- Update deal stage
+
+#### Pending Documents
+- View deals with no attached documents
+- Attach documents directly from the deal screen
+- Remove previously attached documents
+
+#### On Hold
+- Pause a deal due to external client-side blockers
+- Capture hold reason
+- Resume the deal to its previous stage
+
+#### Inactive Deals
+- Surface deals with no stage update for 7+ days
+- Accessible via notification bell
+- Excludes deals that are On Hold
+
+#### Won Deals
+- Display-only count on the home screen
+- Not included in active workflow
+
+---
+
+## Product Rules
+
+- Stage updates do not require document uploads
+- Document management is separate from stage movement
+- Pending Documents = deals with zero attached documents
+- Inactive status is based on stage activity only
+- Document uploads do not reset inactivity tracking
+- On Hold deals are excluded from inactive reminders
+
+---
+
+## Out of Scope (V1)
+
+- Team performance dashboards
+- Leaderboards and top-performer tracking
+- Deal reassignment workflows
+- Authentication and permissions
+- Backend integrations
+- Document approval workflows
+- Push notifications
+- Audit logs and notes
+
+---
+
+## Technology Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+---
+
+## Running Locally
+
+Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/Srijan88/syookinternalcrm.git
+cd syookinternalcrm
