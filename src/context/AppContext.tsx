@@ -24,6 +24,8 @@ interface AppContextType {
   updateStage: (dealId: string, newStage: Stage) => void;
   /** Attach a document to a deal (no stage change) */
   attachDocument: (dealId: string, filename: string) => void;
+  /** Delete a single document from a deal */
+  deleteDocument: (dealId: string, docId: string) => void;
   /** Legacy: update stage AND attach doc in one action (used from pending-docs flow) */
   updateStageAndAttach: (dealId: string, newStage: Stage, filename: string | null) => void;
   putOnHold: (dealId: string, reason: string) => void;
@@ -98,6 +100,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setActiveSheet(null);
   }, []);
 
+  /** Delete a single document from a deal */
+  const deleteDocument = useCallback((dealId: string, docId: string) => {
+    setDeals(prev => prev.map(d => {
+      if (d.id !== dealId) return d;
+      return { ...d, documents: d.documents.filter(doc => doc.id !== docId) };
+    }));
+  }, []);
+
   const updateStageAndAttach = useCallback((
     dealId: string,
     newStage: Stage,
@@ -165,7 +175,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const value: AppContextType = {
     deals, screen, selectedDealId, activeSheet, pendingNewStage, pendingAttachDealId,
     navigate, goBack, openSheet, closeSheet, setPendingNewStage, setPendingAttachDealId,
-    updateStage, attachDocument, updateStageAndAttach, putOnHold, resumeDeal,
+    updateStage, attachDocument, deleteDocument, updateStageAndAttach, putOnHold, resumeDeal,
     selectedDeal, pipelineDeals, pendingDocDeals, onHoldDeals, wonCount: WON_COUNT, inactiveDeals, bellCount,
   };
 

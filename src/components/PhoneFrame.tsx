@@ -41,12 +41,10 @@ export function PhoneFrame({ children }: { children: React.ReactNode }) {
         </div>
 
         {/*
-          Screen content.
-          height: 100dvh + display: flex + flex-direction: column means:
-          – The screen is always exactly viewport-tall (never body-scroll)
-          – Children (status bar spacer, App flex column, home indicator) are
-            stacked vertically and own their respective heights
-          No transform needed — BottomNav is in normal flow, not position:fixed
+          transform: translateZ(0) creates a fixed-positioning context so
+          position:fixed children (BottomSheet backdrop + panel) stay inside
+          this 390px column rather than spanning the full browser viewport.
+          BottomNav is in normal flow, so the old "nav scrolls away" bug is gone.
         */}
         <div
           className="w-full bg-bg overflow-hidden"
@@ -55,6 +53,7 @@ export function PhoneFrame({ children }: { children: React.ReactNode }) {
             display: 'flex',
             flexDirection: 'column',
             position: 'relative',
+            transform: 'translateZ(0)',
           }}
         >
           {/* Status bar spacer (desktop only, accounts for Dynamic Island) */}

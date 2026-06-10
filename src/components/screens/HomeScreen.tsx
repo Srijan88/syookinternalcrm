@@ -63,14 +63,8 @@ export function HomeScreen() {
   ];
 
   return (
-    /*
-     * Outer: fixed height column, no scroll — header + cards always visible.
-     * Inner scroll area: only the Missing Documents list scrolls.
-     */
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F8F7F5', overflow: 'hidden' }}>
-
-      {/* ══ NON-SCROLLING TOP SECTION: gradient header + 2×2 cards ══ */}
-      <div style={{ flexShrink: 0 }}>
+    /* Single scroll surface — block layout so flex-shrink never compresses children */
+    <div style={{ height: '100%', background: '#F8F7F5', overflowY: 'auto' }}>
 
       {/* ── Compact gradient header ── */}
       <motion.div
@@ -213,11 +207,6 @@ export function HomeScreen() {
         })}
       </div>
 
-      </div>{/* end NON-SCROLLING TOP SECTION */}
-
-      {/* ══ SCROLLABLE BOTTOM SECTION: Missing Documents list ══ */}
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: 16 }}>
-
       {/* ── Missing Documents ── */}
       <motion.div
         initial={{ opacity: 0, y: 6 }}
@@ -278,7 +267,7 @@ export function HomeScreen() {
               All documents up to date
             </div>
           ) : (
-            pendingDocDeals.slice(0, 5).map((deal, i) => {
+            pendingDocDeals.map((deal, i) => {
               const daysAgo = daysSince(deal.lastActivityDate);
               return (
                 <div key={deal.id}>
@@ -314,7 +303,7 @@ export function HomeScreen() {
         </div>
       </motion.div>
 
-      </div>{/* end SCROLLABLE BOTTOM SECTION */}
+      <div style={{ height: 16 }} />
     </div>
   );
 }
